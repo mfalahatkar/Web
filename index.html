@@ -33,33 +33,207 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 15px; }
         .full-width-section { width: 100%; }
 
-        /* --- اصلاحات برای مگامنو --- */
+        /* --- اصلاحات برای مگامنو و زیرمنوها --- */
         header { 
-            position: relative;
-            z-index: 1000;
+            position: sticky; 
+            top: 0; 
+            z-index: 1100; /* هدر بالاترین z-index را دارد */
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         
         nav {
             position: relative;
-            z-index: 999;
-        }
-        
-        .secondary-slider-section {
-            position: relative;
-            z-index: 1;
+            z-index: 1099; /* نوبار زیر هدر اما بالای محتوا */
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
         }
         
         .mega-menu {
             position: absolute;
             top: 100%;
             right: 0;
-            z-index: 1100;
-            transform: translateY(10px);
-            transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+            z-index: 1102; /* مگامنو بالاتر از هدر و نوبار */
+            background-color: #fff; 
+            border: 1px solid #e0e0e0; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+            border-radius: 8px; 
+            border-top-right-radius: 0; 
+            width: auto; 
+            min-width: 800px;
+            max-width: calc(100vw - 30px); 
+            display: flex; 
+            overflow: hidden; 
+            opacity: 0; 
+            visibility: hidden;
+            transform: translateY(10px); 
+            transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s 0.25s; 
+        }
+        
+        .nav-links li.category-nav-item:hover > .mega-menu { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+            transition-delay: 0s; 
         }
         
         .nav-links li.category-nav-item {
-            position: static;
+            position: static; /* برای پوشش دادن کل عرض با مگامنو */
+        }
+
+        /* قاعده برای عنصر والد زیرمنوهای ساده */
+        .nav-links li.has-submenu { 
+            position: relative; 
+            flex-shrink: 0; 
+            z-index: 1098; /* z-index به والد برای Stacking Context بالاتر */
+        }
+
+        /* قاعده برای عنصر فرزند زیرمنوهای ساده */
+        .nav-links li.has-submenu .simple-submenu { 
+            display: none; 
+            position: absolute; /* باید absolute باشد */
+            top: 100%; 
+            right: 0; 
+            background-color: #fff; 
+            border: 1px solid #e0e0e0; 
+            min-width: 200px; 
+            max-width: 250px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
+            z-index: 1103; /* Z-index بالا داخل context والد */
+            border-radius: 0 0 6px 6px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(10px); 
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s 0.2s; 
+            overflow-x: hidden;
+        }
+        
+        .nav-links li.has-submenu:hover .simple-submenu { 
+            display: block; 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+            transition-delay: 0s; 
+        }
+
+        .secondary-slider-section {
+            position: relative;
+            z-index: 1; /* اسلایدر اصلی در لایه پایین‌تر */
+        }
+
+        /* کنترل‌های اسلایدرها */
+        .secondary-slider-controls { 
+            position: absolute; 
+            z-index: 5; /* بالای تصویر اسلایدر، پایین‌تر از منوها */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        
+        .secondary-slider-controls button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #333;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .secondary-slider-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--new-red-primary);
+        }
+        
+        .slider-main .controls { 
+            position: absolute;
+            z-index: 10; /* بالای تصویر اسلایدر */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        
+        .slider-main .controls button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #333;
+            font-size: 20px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .slider-main .controls button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--new-red-primary);
+        }
+        
+        /* پیشنهادات جستجو */
+        .search-suggestions { 
+            position: absolute; 
+            z-index: 1101; /* بالای نوبار عادی */
+            top: 100%;
+            right: 0;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            display: none;
+        }
+        
+        .search-suggestions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .search-suggestions ul li a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            transition: background-color 0.2s ease;
+        }
+        
+        .search-suggestions ul li a:hover {
+            background-color: #f5f5f5;
+            color: var(--new-red-primary);
+        }
+
+        /* سایر بخش‌های محتوا */
+        .info-box-section,
+        .hero-section,
+        .quick-categories,
+        .amazing-offers-section,
+        .promo-banners-row,
+        .product-section,
+        .popular-brands,
+        .feature-section,
+        .team-section,
+        .testimonials-section,
+        .blog-section,
+        .instagram-banner,
+        footer {
+             position: relative;
+             z-index: 1; /* لایه استاندارد برای بخش‌های محتوا */
         }
 
         .section-title { font-size: 20px; font-weight: bold; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
@@ -72,15 +246,6 @@
         .btn-outline { border: 1px solid #ddd; color: #555; background-color: #fff; }
         .btn-outline:hover{ background-color: #f7f7f7; color: var(--new-red-primary); border-color: #ccc; }
 
-        header { 
-            background-color: #fff; 
-            padding: 5px 0; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1100;
-            border-bottom: 1px solid #eee; 
-        }
         .header-banner { background-image: var(--new-red-gradient); color: #fff; text-align: center; padding: 8px 0; font-size: 14px; }
         .header-banner img { display: inline-block; vertical-align: middle; height: 25px; margin: 0 10px; filter: brightness(0) invert(1); }
         .header-main { padding: 15px 0; }
@@ -93,11 +258,6 @@
         .search-container input::placeholder { color: #aaa; }
         .search-container button { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer; transition: color 0.3s ease; }
         .search-container button:hover { color: var(--new-red-primary); }
-        .search-suggestions { position: absolute; top: calc(100% + 5px); left: 0; right: 0; background-color: #fff; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1101; max-height: 300px; overflow-y: auto; display: none; }
-        .search-suggestions ul { list-style: none; padding: 0; margin: 0; }
-        .search-suggestions li a { display: block; padding: 10px 15px; font-size: 13px; color: #333; text-decoration: none; border-bottom: 1px solid #f5f5f5; }
-        .search-suggestions li:last-child a { border-bottom: none; }
-        .search-suggestions li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
 
         .header-actions { display: flex; align-items: center; gap: 10px; }
         .header-actions a { font-size: 14px; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 6px; }
@@ -109,14 +269,6 @@
         .header-actions .cart-link i, .header-actions a[aria-label="Profile"] i { color: #fff; }
         .header-actions .cart-link:hover, .header-actions a[aria-label="Profile"]:hover { background-image: linear-gradient(to top, var(--new-red-darker), var(--new-red-primary)); color: #fff; }
 
-        nav { 
-            background-color: #fff; 
-            border-top: 1px solid #eee; 
-            border-bottom: 1px solid #eee; 
-            padding: 0;
-            position: relative; 
-            z-index: 1099;
-        }
         .menu-toggle { display: none; background: none; border: none; font-size: 24px; color: #333; cursor: pointer; padding: 10px 15px; position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 1102; }
         .menu-toggle:hover { color: var(--new-red-primary); }
 
@@ -133,7 +285,7 @@
         }
         .nav-links::-webkit-scrollbar { display: none; }
         .nav-links li { position: relative; flex-shrink: 0; }
-        
+
         .nav-links li a { 
             text-decoration: none; 
             color: #444; 
@@ -165,32 +317,6 @@
 
         .nav-links li:not(.category-nav-item) a:hover, .nav-links li:not(.category-nav-item) a:hover i { color: var(--new-red-primary); }
 
-        .mega-menu { 
-            position: absolute; 
-            top: calc(100% + 5px); 
-            right: 0; 
-            background-color: #fff; 
-            border: 1px solid #e0e0e0; 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
-            z-index: 1102;
-            border-radius: 8px; 
-            border-top-right-radius: 0; 
-            width: auto; 
-            min-width: 800px;
-            max-width: calc(100vw - 30px); 
-            display: flex; 
-            overflow: hidden; 
-            opacity: 0; 
-            visibility: hidden;
-            transform: translateY(10px); 
-            transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s 0.25s; 
-        }
-        .nav-links li.category-nav-item:hover > .mega-menu { 
-            opacity: 1; 
-            visibility: visible; 
-            transform: translateY(0); 
-            transition-delay: 0s; 
-        }
         .mega-menu-panel { padding: 15px; box-sizing: border-box; }
         
         .mega-menu-main-categories { 
@@ -236,31 +362,6 @@
         .mega-menu-promo-area img { max-width: 100%; height: auto; object-fit: cover; border-radius: 6px; margin-bottom:10px; }
         .mega-menu-promo-area p { font-size: 13px; color: #333; margin-bottom: 10px; }
 
-        .nav-links li.has-submenu .simple-submenu { 
-            display: none; 
-            position: absolute; 
-            top: 100%; 
-            right: 0; 
-            background-color: #fff; 
-            border: 1px solid #e0e0e0; 
-            min-width: 200px; 
-            max-width: 250px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
-            z-index: 1101; /* افزایش z-index برای نمایش بالای اسلایدر */
-            border-radius: 0 0 6px 6px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(10px); 
-            transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s 0.2s; 
-            overflow-x: hidden;
-        }
-        .nav-links li.has-submenu:hover .simple-submenu { 
-            display: block; 
-            opacity: 1; 
-            visibility: visible; 
-            transform: translateY(0); 
-            transition-delay: 0s; 
-        }
         .simple-submenu li a { padding: 10px 15px; font-size: 13px; color: #444; border-bottom: 1px solid #f5f5f5; white-space: nowrap; }
         .simple-submenu li:last-child a { border-bottom: none; }
         .simple-submenu li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
@@ -280,36 +381,23 @@
         .mobile-submenu li a { padding: 10px 35px 10px 20px; font-size: 13px; color: #555; border-top: 1px solid #eee; }
         .mobile-submenu li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
 
-        .secondary-slider-section { 
-            width: 100%; 
-            margin: 0 0 20px 0; 
-            position: relative; 
-            overflow: hidden; 
-            z-index: 1;
-        }
         .secondary-slider { display: flex; transition: transform 0.5s ease-in-out; height: 350px; }
         .secondary-slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; }
         .secondary-slide img { width: 100%; height: 100%; object-fit: cover; }
-        .secondary-slider-controls { position: absolute; top: 50%; left: 15px; right: 15px; transform: translateY(-50%); display: flex; justify-content: space-between; z-index: 5; }
-        .secondary-slider-controls button { background-color: rgba(0, 0, 0, 0.4); border: none; color: #fff; font-size: 22px; padding: 10px 15px; cursor: pointer; border-radius: 50%; transition: background-color 0.3s ease; line-height: 1; }
-        .secondary-slider-controls button:hover { background-color: rgba(190, 21, 21, 0.8); }
 
-        .info-box-section { background-color: #fff; padding: 30px 0; margin-bottom: 20px; z-index: 1; }
+        .info-box-section { background-color: #fff; padding: 30px 0; margin-bottom: 20px; }
         .info-box-content { text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; border-radius: 8px; }
         .info-box-content h2 { font-family: 'IRANYekan', 'IRANSans', sans-serif; font-size: 20px; color: var(--new-red-primary); margin-bottom: 15px; }
         .info-box-content p { font-family: 'IRANYekan', 'IRANSans', sans-serif; font-size: 15px; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 1em; }
         .info-box-content p:last-child { margin-bottom: 0; }
 
-        .hero-section { margin: 20px 0; z-index: 1; }
+        .hero-section { margin: 20px 0; }
         .hero-section .container { display: flex; gap: 15px; align-items: flex-start; }
         .slider-main { flex-grow: 1; position: relative; height: 380px; overflow: hidden; border-radius: 10px; background-color: #eee; }
         .slider-main .slides { display: flex; height: 100%; transition: transform 0.7s ease-in-out; }
         .slider-main .slide { flex: 0 0 100%; height: 100%; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
         .slider-main .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slider-main .controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 10px; opacity: 0; transition: opacity 0.4s ease; z-index: 10; }
-        .slider-main:hover .controls { opacity: 1; }
-        .slider-main .controls button { background-color: rgba(0,0,0,0.4); border: none; color: #fff; font-size: 20px; padding: 8px 12px; cursor: pointer; border-radius: 50%; line-height: 1; transition: background-color 0.3s ease; }
-        .slider-main .controls button:hover { background-color: rgba(0,0,0,0.7); }
+
         .side-banners { display: flex; flex-direction: column; gap: 15px; width: 250px; flex-shrink: 0; }
         .side-banners .side-banner { border-radius: 10px; overflow: hidden; height: 182.5px; background-color: #eee; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .side-banners .side-banner:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -421,14 +509,13 @@
         }
         .footer-subscription .subscription-input-group {
             display: flex;
-            flex-direction: row;
             margin-bottom: 10px;
         }
         .footer-subscription input { 
             flex: 1;
             padding: 10px;
             border: 1px solid #eee;
-            border-radius: 0 5px 5px 0 !important;
+            border-radius: 5px 0 0 5px;
             outline: none;
             font-family: inherit;
             transition: border-color 0.3s ease;
@@ -440,11 +527,10 @@
             border: none;
             background-image: var(--new-red-gradient);
             color: #fff;
-            border-radius: 5px 0 0 5px !important;
+            border-radius: 0 5px 5px 0;
             cursor: pointer;
             white-space: nowrap;
             transition: background-image 0.3s ease;
-            margin-right: -1px;
         }
         .footer-subscription button:hover { background-image: linear-gradient(to top, var(--new-red-darker), var(--new-red-primary)); }
         
@@ -464,33 +550,66 @@
         .social-icons a { color: #aaa; font-size: 20px; transition: color 0.3s ease, transform 0.3s ease; }
         .social-icons a:hover { color: var(--new-red-primary); transform: scale(1.2); }
 
-        @media (max-width: 1200px) { .container { max-width: 1140px; } .amazing-offers-section { flex-direction: column; align-items: stretch; } .amazing-offers-intro { align-items: center; margin-bottom: 15px; } .mega-menu { min-width: 800px; max-width: 960px; } }
+        @media (max-width: 1200px) { 
+            .container { max-width: 1140px; } 
+            .amazing-offers-section { flex-direction: column; align-items: stretch; } 
+            .amazing-offers-intro { align-items: center; margin-bottom: 15px; } 
+            .mega-menu { min-width: 800px; max-width: 960px; } 
+        }
+        
         @media (max-width: 992px) {
             .container { max-width: 960px; }
             .header-main .container { justify-content: space-between; position: relative; }
             .menu-toggle { display: block; }
             .search-container { order: 3; width: 100%; margin-top: 10px;}
-            .logo { order: 1; } .header-actions { order: 2;}
+            .logo { order: 1; } 
+            .header-actions { order: 2;}
             nav .container { padding: 0; }
-            .nav-links { flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1101; padding: 0; gap: 0; max-height: 0; overflow-y: auto; overflow-x: hidden; flex-wrap: wrap; }
+            
+            /* در مد موبایل، Nav-links position: absolute می‌گیرد و خودش Stacking Context بالا دارد */
+            .nav-links { 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                right: 0; 
+                left: 0; 
+                background-color: #fff; 
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                z-index: 1101; 
+                padding: 0; 
+                gap: 0; 
+                max-height: 0; 
+                overflow-y: auto; 
+                overflow-x: hidden; 
+                flex-wrap: wrap;
+                transition: max-height 0.3s ease-out;
+            }
             .nav-links.active { max-height: 80vh; padding-bottom: 10px; }
             .nav-links li { width: 100%; border-bottom: 1px solid #f0f0f0; }
             .nav-links li:last-child { border-bottom: none; }
             .nav-links li a { padding: 12px 20px; width: 100%; border-radius: 0; }
-            .nav-links li.category-nav-item > .mega-menu, .nav-links li.has-submenu .simple-submenu { display: none !important; }
+            
+            /* زیرمنوهای دسکتاپ در موبایل مخفی می‌شوند */
+            .nav-links li.category-nav-item > .mega-menu, 
+            .nav-links li.has-submenu .simple-submenu { display: none !important; }
+            
+            /* زیرمنوهای موبایل که در داخل nav.active قرار می‌گیرند، به دلیل z-index والدشان (1101) روی اسلایدر قرار می‌گیرند */
             .nav-links li.open .mobile-submenu { display: block; max-height: 1000px; }
 
             .secondary-slider { height: 280px; }
             .hero-section .container { flex-direction: column; }
-            .slider-main { width: 100%; } .side-banners { width: 100%; flex-direction: row; }
+            .slider-main { width: 100%; } 
+            .side-banners { width: 100%; flex-direction: row; }
             .side-banners .side-banner { flex: 1; height: 150px; }
-            .feature-section { flex-direction: column; } .feature-media { flex-basis: auto; width: 100%; }
+            .feature-section { flex-direction: column; } 
+            .feature-media { flex-basis: auto; width: 100%; }
             .testimonial-card, .blog-post { width: calc(50% - 8px); }
             .footer-column { min-width: 45%; }
             .footer-column.about-us { order: -1; width: 100%; text-align: center; }
             .footer-column.about-us .trust-logos { justify-content: center; }
             .footer-contact-info { display: inline-block; margin: 0 auto 20px auto; }
-            .footer-bottom { flex-direction: column; } .social-icons { margin-top: 10px; }
+            .footer-bottom { flex-direction: column; } 
+            .social-icons { margin-top: 10px; }
             
             /* بهبود فرم خبرنامه در موبایل */
             .footer-subscription .subscription-input-group {
@@ -499,15 +618,42 @@
             .footer-subscription input,
             .footer-subscription button {
                 width: 100%;
-                border-radius: 5px !important;
+                border-radius: 5px;
                 margin-right: 0;
             }
             .footer-subscription button {
                 margin-top: 5px;
             }
         }
-        @media (max-width: 768px) { .testimonial-card, .blog-post { width: 100%; } .secondary-slider { height: 220px; } .secondary-slider-controls button { font-size: 18px; padding: 8px 12px; } .info-box-content { padding: 15px; } .info-box-content h2 { font-size: 18px; } .info-box-content p { font-size: 14px; } }
-        @media (max-width: 576px) { .secondary-slider { height: 180px; } }
+        
+        @media (max-width: 768px) { 
+            .testimonial-card, .blog-post { width: 100%; } 
+            .secondary-slider { height: 220px; } 
+            .secondary-slider-controls button { font-size: 18px; width: 35px; height: 35px; } 
+            .info-box-content { padding: 15px; } 
+            .info-box-content h2 { font-size: 18px; } 
+            .info-box-content p { font-size: 14px; }
+            .slider-main { height: 300px; }
+            .amazing-offers-section { padding: 15px 10px; }
+            .product-card { min-width: 170px; width: 170px; }
+            .promo-banner { height: 160px; }
+            .feature-section { padding: 20px 15px; }
+            .instagram-banner { padding: 20px 15px; flex-direction: column; align-items: center; text-align: center; }
+        }
+        
+        @media (max-width: 576px) { 
+            .secondary-slider { height: 180px; }
+            .slider-main { height: 250px; }
+            .side-banners { flex-direction: column; }
+            .side-banners .side-banner { width: 100%; height: 140px; }
+            .category-item { width: 80px; }
+            .product-card { min-width: 150px; width: 150px; }
+            .product-card .product-image img { width: 120px; height: 120px; }
+            .feature-text h3 { font-size: 16px; }
+            .feature-text p { font-size: 13px; }
+            .team-member { width: 140px; }
+            .footer-contact-info .phone-number { font-size: 18px; }
+        }
     </style>
 </head>
 <body>
@@ -596,7 +742,7 @@
             <div class="info-box-content">
                 <h2>نمایندگی تعمیرات لوازم خانگی بوش در رشت</h2>
                 <p>نمایندگی بوش رشت به عنوان یکی از بهترین نمایندگی ‌های تعمیرات لوازم خانگی شناخته شده است. مرکز تخصصی تعمیرات بوش در رشت، با بیش از 35 سال سابقه، به صورت 24 ساعته آماده خدمت رسانی به تمام مشتریان خود می باشد. ارائه هرگونه خدمات تعمیر و همچنین خدمات پس از فروش در نمایندگی تعمیرات بوش در رشت، توسط کارشناسان و تکنسین حرفه ای و آموزش دیده صورت می گیرد.</p>
-                <p>تمامی تعمیرکاران و کارکنان این نمایندگی، پس از گذراندن دوره‌ های آموزشی تئوری و عملی، با استفاده از بهترین و مجهز ترین تجهیزات به تعمیر لوازم خانگی مارک بوش می ‌پردازند. در سریع ترین زمان ممکن، توسط ابزار های نوین و پیشرفته، مشکل دستگاه شما را شناسایی کرده و سپس جهت تعمیر دستگاه، اقدامات لازم را به کار می گیرند. همچنین امکان دریافت خدمات از نمایندگی بوش در رشت، برای تمام شهروندان شهر رشت وجود دارد. از بارزترین پارامتر های نمایندگی بوش رشت، می توان به ارائه خدمات پس از فروش اشاره کرد.</p>
+                <p>تمامی تعمیرکاران و کارکنان این نمایندگی, پس از گذراندن دوره‌ های آموزشی تئوری و عملی, با استفاده از بهترین و مجهز ترین تجهیزات به تعمیر لوازم خانگی مارک بوش می ‌پردازند. در سریع ترین زمان ممکن، توسط ابزار های نوین و پیشرفته، مشکل دستگاه شما را شناسایی کرده و سپس جهت تعمیر دستگاه، اقدامات لازم را به کار می گیرند. همچنین امکان دریافت خدمات از نمایندگی بوش در رشت، برای تمام شهروندان شهر رشت وجود دارد. از بارزترین پارامتر های نمایندگی بوش رشت، می توان به ارائه خدمات پس از فروش اشاره کرد.</p>
             </div>
         </div>
     </section>
@@ -716,7 +862,7 @@
         <!-- وبلاگ -->
         <section class="blog-section">
             <h2 class="section-title">خواندنی‌ها: راهنما و مقالات <a href="#" class="view-all">مشاهده همه</a></h2>
-            <div class="blog-grid"><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/EF5350?text=راهنمای+پکیج" alt="راهنمای انتخاب پکیج"></a><div class="post-content"><h4><a href="#">راهنمای جامع انتخاب پکیج شوفاژ دیواری بوتان مناسب منزل شما</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۱ ماه پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/005691?text=نگهداری+لباسشویی" alt="نگهداری لباسشویی بوش"></a><div class="post-content"><h4><a href="#">نکات کلیدی برای افزایش طول عمر ماشین لباسشویی بوش</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۲ هفته پیش</span><span><i class="far fa-user"></i> تحریریه</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/007bff?text=ابزار+بوش" alt="ابزار جدید بوش"></a><div class="post-content"><h4><a href="#">معرفی جدیدترین ابزارآلات شارژی بوش با تکنولوژی ProCORE18V</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۳ روز پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div></div>
+            <div class="blog-grid"><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/EF5350?text=راهنمای+پکیج" alt="راهنمای انتخاب پکیج"></a><div class="post-content"><h4><a href="#">راهنمای جامع انتخاب پکیج شوفاژ دیواری بوتان مناسب منزل شما</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۱ ماه پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/005691?text=نگهداری+لباسشویی" alt="نگهداری لباسشویی بوش"></a><div class="post-content"><h4><a href="#">نکات کلیدی برای افزایش طول عمر ماشین لباسشویی بوش</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۲ هفته پیش</span><span><i class="far fa-user"></i> تحریریه</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/007bff?text=ابزار+جدید+بوش" alt="ابزار جدید بوش"></a><div class="post-content"><h4><a href="#">معرفی جدیدترین ابزارآلات شارژی بوش با تکنولوژی ProCORE18V</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۳ روز پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div></div>
         </section>
         <!-- بنر اینستاگرام -->
         <section class="instagram-banner">
