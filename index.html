@@ -33,189 +33,21 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 15px; }
         .full-width-section { width: 100%; }
 
-        /* --- اصلاحات برای مگامنو و زیرمنوها --- */
+        /* --- سیستم جدید z-index --- */
         header { 
-            position: sticky; 
-            top: 0; 
-            z-index: 1100; /* هدر بالاترین z-index را دارد */
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1100;
         }
-        
+
         nav {
             position: relative;
-            z-index: 1099; /* نوبار زیر هدر اما بالای محتوا */
-            background-color: #fff;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            z-index: 1102; /* مگامنو بالاتر از هدر و نوبار */
-            background-color: #fff; 
-            border: 1px solid #e0e0e0; 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
-            border-radius: 8px; 
-            border-top-right-radius: 0; 
-            width: auto; 
-            min-width: 800px;
-            max-width: calc(100vw - 30px); 
-            display: flex; 
-            overflow: hidden; 
-            opacity: 0; 
-            visibility: hidden;
-            transform: translateY(10px); 
-            transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s 0.25s; 
-        }
-        
-        .nav-links li.category-nav-item:hover > .mega-menu { 
-            opacity: 1; 
-            visibility: visible; 
-            transform: translateY(0); 
-            transition-delay: 0s; 
-        }
-        
-        .nav-links li.category-nav-item {
-            position: static; /* برای پوشش دادن کل عرض با مگامنو */
-        }
-
-        /* قاعده برای عنصر والد زیرمنوهای ساده */
-        .nav-links li.has-submenu { 
-            position: relative; 
-            flex-shrink: 0; 
-            z-index: 1098; /* z-index به والد برای Stacking Context بالاتر */
-        }
-
-        /* قاعده برای عنصر فرزند زیرمنوهای ساده */
-        .nav-links li.has-submenu .simple-submenu { 
-            display: none; 
-            position: absolute; /* باید absolute باشد */
-            top: 100%; 
-            right: 0; 
-            background-color: #fff; 
-            border: 1px solid #e0e0e0; 
-            min-width: 200px; 
-            max-width: 250px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
-            z-index: 1103; /* Z-index بالا داخل context والد */
-            border-radius: 0 0 6px 6px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(10px); 
-            transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s 0.2s; 
-            overflow-x: hidden;
-        }
-        
-        .nav-links li.has-submenu:hover .simple-submenu { 
-            display: block; 
-            opacity: 1; 
-            visibility: visible; 
-            transform: translateY(0); 
-            transition-delay: 0s; 
+            z-index: 1099;
         }
 
         .secondary-slider-section {
             position: relative;
-            z-index: 1; /* اسلایدر اصلی در لایه پایین‌تر */
-        }
-
-        /* کنترل‌های اسلایدرها */
-        .secondary-slider-controls { 
-            position: absolute; 
-            z-index: 5; /* بالای تصویر اسلایدر، پایین‌تر از منوها */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 15px;
-        }
-        
-        .secondary-slider-controls button {
-            background-color: rgba(255, 255, 255, 0.7);
-            border: none;
-            color: #333;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .secondary-slider-controls button:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: var(--new-red-primary);
-        }
-        
-        .slider-main .controls { 
-            position: absolute;
-            z-index: 10; /* بالای تصویر اسلایدر */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 15px;
-        }
-        
-        .slider-main .controls button {
-            background-color: rgba(255, 255, 255, 0.7);
-            border: none;
-            color: #333;
-            font-size: 20px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .slider-main .controls button:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: var(--new-red-primary);
-        }
-        
-        /* پیشنهادات جستجو */
-        .search-suggestions { 
-            position: absolute; 
-            z-index: 1101; /* بالای نوبار عادی */
-            top: 100%;
-            right: 0;
-            left: 0;
-            background-color: #fff;
-            border: 1px solid #eee;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            padding: 10px 0;
-            display: none;
-        }
-        
-        .search-suggestions ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .search-suggestions ul li a {
-            display: block;
-            padding: 8px 15px;
-            color: #333;
-            transition: background-color 0.2s ease;
-        }
-        
-        .search-suggestions ul li a:hover {
-            background-color: #f5f5f5;
-            color: var(--new-red-primary);
+            z-index: 1;
         }
 
         /* سایر بخش‌های محتوا */
@@ -232,8 +64,20 @@
         .blog-section,
         .instagram-banner,
         footer {
-             position: relative;
-             z-index: 1; /* لایه استاندارد برای بخش‌های محتوا */
+            position: relative;
+            z-index: 1;
+        }
+
+        .mega-menu {
+            z-index: 1102;
+        }
+
+        .nav-links li.has-submenu .simple-submenu {
+            z-index: 1103;
+        }
+
+        .search-suggestions { 
+            z-index: 1101;
         }
 
         .section-title { font-size: 20px; font-weight: bold; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
@@ -246,6 +90,15 @@
         .btn-outline { border: 1px solid #ddd; color: #555; background-color: #fff; }
         .btn-outline:hover{ background-color: #f7f7f7; color: var(--new-red-primary); border-color: #ccc; }
 
+        header { 
+            background-color: #fff; 
+            padding: 5px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1100;
+            border-bottom: 1px solid #eee; 
+        }
         .header-banner { background-image: var(--new-red-gradient); color: #fff; text-align: center; padding: 8px 0; font-size: 14px; }
         .header-banner img { display: inline-block; vertical-align: middle; height: 25px; margin: 0 10px; filter: brightness(0) invert(1); }
         .header-main { padding: 15px 0; }
@@ -258,6 +111,24 @@
         .search-container input::placeholder { color: #aaa; }
         .search-container button { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer; transition: color 0.3s ease; }
         .search-container button:hover { color: var(--new-red-primary); }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1101;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .search-suggestions ul { list-style: none; padding: 0; margin: 0; }
+        .search-suggestions li a { display: block; padding: 10px 15px; color: #444; transition: background-color 0.2s ease; }
+        .search-suggestions li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
 
         .header-actions { display: flex; align-items: center; gap: 10px; }
         .header-actions a { font-size: 14px; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 6px; }
@@ -269,6 +140,14 @@
         .header-actions .cart-link i, .header-actions a[aria-label="Profile"] i { color: #fff; }
         .header-actions .cart-link:hover, .header-actions a[aria-label="Profile"]:hover { background-image: linear-gradient(to top, var(--new-red-darker), var(--new-red-primary)); color: #fff; }
 
+        nav { 
+            background-color: #fff; 
+            border-top: 1px solid #eee; 
+            border-bottom: 1px solid #eee; 
+            padding: 0;
+            position: relative; 
+            z-index: 1099;
+        }
         .menu-toggle { display: none; background: none; border: none; font-size: 24px; color: #333; cursor: pointer; padding: 10px 15px; position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 1102; }
         .menu-toggle:hover { color: var(--new-red-primary); }
 
@@ -285,6 +164,12 @@
         }
         .nav-links::-webkit-scrollbar { display: none; }
         .nav-links li { position: relative; flex-shrink: 0; }
+        
+        .nav-links li.has-submenu { 
+            position: relative; 
+            flex-shrink: 0; 
+            z-index: 1098;
+        }
 
         .nav-links li a { 
             text-decoration: none; 
@@ -317,6 +202,32 @@
 
         .nav-links li:not(.category-nav-item) a:hover, .nav-links li:not(.category-nav-item) a:hover i { color: var(--new-red-primary); }
 
+        .mega-menu { 
+            position: absolute; 
+            top: calc(100% + 5px); 
+            right: 0; 
+            background-color: #fff; 
+            border: 1px solid #e0e0e0; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+            z-index: 1102;
+            border-radius: 8px; 
+            border-top-right-radius: 0; 
+            width: auto; 
+            min-width: 800px;
+            max-width: calc(100vw - 30px); 
+            display: flex; 
+            overflow: hidden; 
+            opacity: 0; 
+            visibility: hidden;
+            transform: translateY(10px); 
+            transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s;
+        }
+        .nav-links li.category-nav-item:hover > .mega-menu { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+            transition-delay: 0s; 
+        }
         .mega-menu-panel { padding: 15px; box-sizing: border-box; }
         
         .mega-menu-main-categories { 
@@ -362,6 +273,32 @@
         .mega-menu-promo-area img { max-width: 100%; height: auto; object-fit: cover; border-radius: 6px; margin-bottom:10px; }
         .mega-menu-promo-area p { font-size: 13px; color: #333; margin-bottom: 10px; }
 
+        .nav-links li.has-submenu .simple-submenu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            right: 0; 
+            background-color: #fff; 
+            border: 1px solid #e0e0e0; 
+            min-width: 200px; 
+            max-width: 250px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
+            z-index: 1103;
+            border-radius: 0 0 6px 6px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(10px); 
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s; 
+            overflow-x: hidden;
+        }
+
+        .nav-links li.has-submenu:hover .simple-submenu { 
+            display: block; 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+            transition-delay: 0s; 
+        }
         .simple-submenu li a { padding: 10px 15px; font-size: 13px; color: #444; border-bottom: 1px solid #f5f5f5; white-space: nowrap; }
         .simple-submenu li:last-child a { border-bottom: none; }
         .simple-submenu li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
@@ -381,35 +318,98 @@
         .mobile-submenu li a { padding: 10px 35px 10px 20px; font-size: 13px; color: #555; border-top: 1px solid #eee; }
         .mobile-submenu li a:hover { background-color: var(--new-red-hover-bg); color: var(--new-red-primary); }
 
+        .secondary-slider-section { 
+            width: 100%; 
+            margin: 0 0 20px 0; 
+            position: relative; 
+            overflow: hidden; 
+            z-index: 1;
+        }
         .secondary-slider { display: flex; transition: transform 0.5s ease-in-out; height: 350px; }
         .secondary-slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; }
         .secondary-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .secondary-slider-controls { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 15px; 
+            z-index: 5;
+        }
+        .secondary-slider-controls button { 
+            background-color: rgba(255,255,255,0.7); 
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            color: #333; 
+            font-size: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .secondary-slider-controls button:hover { 
+            background-color: var(--new-red-primary); 
+            color: white; 
+        }
 
-        .info-box-section { background-color: #fff; padding: 30px 0; margin-bottom: 20px; }
+        .info-box-section { background-color: #fff; padding: 30px 0; margin-bottom: 20px; z-index: 1; position: relative; }
         .info-box-content { text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; border-radius: 8px; }
         .info-box-content h2 { font-family: 'IRANYekan', 'IRANSans', sans-serif; font-size: 20px; color: var(--new-red-primary); margin-bottom: 15px; }
         .info-box-content p { font-family: 'IRANYekan', 'IRANSans', sans-serif; font-size: 15px; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 1em; }
         .info-box-content p:last-child { margin-bottom: 0; }
 
-        .hero-section { margin: 20px 0; }
+        .hero-section { margin: 20px 0; z-index: 1; position: relative; }
         .hero-section .container { display: flex; gap: 15px; align-items: flex-start; }
         .slider-main { flex-grow: 1; position: relative; height: 380px; overflow: hidden; border-radius: 10px; background-color: #eee; }
         .slider-main .slides { display: flex; height: 100%; transition: transform 0.7s ease-in-out; }
         .slider-main .slide { flex: 0 0 100%; height: 100%; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
         .slider-main .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slider-main .controls { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 15px; 
+            z-index: 10;
+        }
+        .slider-main .controls button { 
+            background-color: rgba(255,255,255,0.7); 
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            color: #333; 
+            font-size: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .slider-main .controls button:hover { 
+            background-color: var(--new-red-primary); 
+            color: white; 
+        }
 
         .side-banners { display: flex; flex-direction: column; gap: 15px; width: 250px; flex-shrink: 0; }
         .side-banners .side-banner { border-radius: 10px; overflow: hidden; height: 182.5px; background-color: #eee; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .side-banners .side-banner:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .side-banners .side-banner img { width: 100%; height: 100%; object-fit: cover; }
 
-        .quick-categories { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; padding: 25px 0; background-color: #fff; margin: 20px 0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .quick-categories { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; padding: 25px 0; background-color: #fff; margin: 20px 0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1; position: relative; }
         .category-item { text-align: center; width: 90px; color: #555; transition: transform 0.2s ease, color 0.2s ease; }
         .category-item:hover { transform: translateY(-4px); color: var(--new-red-primary); }
         .category-item img { width: 55px; height: 55px; margin: 0 auto 8px auto; object-fit: contain; transition: transform 0.2s ease; }
         .category-item:hover img { transform: scale(1.05); } .category-item p { font-size: 12px; }
 
-        .amazing-offers-section { background-image: var(--new-red-gradient); padding: 20px 15px; border-radius: 10px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .amazing-offers-section { background-image: var(--new-red-gradient); padding: 20px 15px; border-radius: 10px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; z-index: 1; position: relative; }
         .amazing-offers-intro { flex-shrink: 0; text-align: center; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .amazing-offers-intro img { width: 140px; margin-bottom: 15px; filter: brightness(0) invert(1); }
         .amazing-offers-intro p { color: #fff; font-size: 14px; margin-bottom: 15px; }
@@ -437,22 +437,22 @@
         .product-tag { position: absolute; top: 10px; left: 10px; background-image: var(--new-red-gradient); color: white; font-size: 11px; padding: 2px 8px; border-radius: 4px; }
         .product-card .countdown-timer { font-size: 12px; color: var(--new-red-primary); text-align: left; margin-top: 5px; }
 
-        .promo-banners-row { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .promo-banners-row { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; z-index: 1; position: relative; }
         .promo-banner { flex: 1; min-width: 300px; height: 200px; background-size: cover; background-position: center; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; font-size: 20px; background-color: #eee; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .promo-banner:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
         .promo-banner img { width: 100%; height: 100%; object-fit: cover; }
 
-        .product-section { background-color: #fff; padding: 20px 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .product-section { background-color: #fff; padding: 20px 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1; position: relative; }
         .product-section .products-grid-wrapper { padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: var(--new-red-primary) #fff; }
         .product-section .products-grid-wrapper::-webkit-scrollbar { height: 8px; } .product-section .products-grid-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .product-section .products-grid-wrapper::-webkit-scrollbar-thumb { background-color: var(--new-red-primary); border-radius: 10px; border: 2px solid #f1f1f1; }
 
-        .popular-brands { background-color: #fff; padding: 20px 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .popular-brands { background-color: #fff; padding: 20px 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1; position: relative; }
         .brands-carousel { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; padding: 20px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; }
         .brand-logo { height: 50px; transition: transform 0.3s ease, opacity 0.3s ease; }
         .brand-logo:hover { opacity: 1; transform: scale(1.1); }
 
-        .feature-section { display: flex; gap: 30px; align-items: center; margin: 30px 0; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); flex-wrap: wrap; }
+        .feature-section { display: flex; gap: 30px; align-items: center; margin: 30px 0; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); flex-wrap: wrap; z-index: 1; position: relative; }
         .feature-text { flex: 1; min-width: 300px; } .feature-text h3 { font-size: 18px; margin-bottom: 15px; color: #005691; }
         .feature-text p { font-size: 14px; line-height: 1.8; color: #555; margin-bottom: 20px; }
         .feature-media { flex-basis: 45%; min-width: 300px; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer; background-color: #eee; }
@@ -460,7 +460,7 @@
         .feature-media .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px; color: rgba(255,255,255,0.9); background-color: rgba(0,86,145,0.6); border-radius: 50%; padding: 15px; line-height: 1; transition: background-color 0.3s ease, color 0.3s ease; }
         .feature-media:hover .play-icon { background-color: var(--new-red-primary); color: #fff; }
 
-        .team-section { margin-bottom: 30px; padding: 20px 15px; background-color: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .team-section { margin-bottom: 30px; padding: 20px 15px; background-color: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1; position: relative; }
         .team-section .team-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .team-member { background-color: #fff; border-radius: 8px; text-align: center; padding: 15px; width: 180px; border: 1px solid #eee; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-member:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -468,7 +468,7 @@
         .team-member:hover img { border-color: var(--new-red-primary); }
          .team-member h4 { font-size: 14px; margin-bottom: 3px; color: #333; } .team-member p { font-size: 12px; color: #888; }
 
-        .testimonials-section { margin: 30px 0; padding: 20px 15px; background-color: #f0f5f9; border-radius: 8px; }
+        .testimonials-section { margin: 30px 0; padding: 20px 15px; background-color: #f0f5f9; border-radius: 8px; z-index: 1; position: relative; }
         .testimonials-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .testimonial-card { width: calc(33.333% - 10px); min-width: 280px; background-color: #fff; border: 1px solid #eee; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -476,7 +476,7 @@
         .testimonial-card .quote::before { content: "\f10d"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; right: 0; top: 0; font-size: 18px; color: #005691; opacity: 0.5; }
         .testimonial-card .author { font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #333; } .stars { color: #f9bc00; font-size: 14px; }
 
-        .blog-section { margin: 30px 0; padding: 20px 15px; background-color: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .blog-section { margin: 30px 0; padding: 20px 15px; background-color: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1; position: relative; }
         .blog-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .blog-post { width: calc(33.333% - 10px); min-width: 280px; background-color: #fff; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .blog-post:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -488,13 +488,13 @@
         .blog-post .post-meta { font-size: 12px; color: #aaa; margin-top: 15px; display: flex; justify-content: space-between; }
         .blog-post .post-meta span i { margin-left: 4px; }
 
-        .instagram-banner { background: linear-gradient(to left, #833ab4, #fd1d1d, #fcb045); padding: 25px; border-radius: 10px; margin: 30px 0; display: flex; justify-content: space-between; align-items: center; color: #fff; flex-wrap: wrap; gap: 15px; }
+        .instagram-banner { background: linear-gradient(to left, #833ab4, #fd1d1d, #fcb045); padding: 25px; border-radius: 10px; margin: 30px 0; display: flex; justify-content: space-between; align-items: center; color: #fff; flex-wrap: wrap; gap: 15px; z-index: 1; position: relative; }
         .instagram-banner .insta-text { font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
         .instagram-banner .insta-text i { font-size: 30px; }
         .instagram-banner .btn-insta { background-color: rgba(255,255,255,0.9); color: #333; font-weight: bold; padding: 8px 20px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; display: inline-flex; align-items: center; gap: 5px; }
         .instagram-banner .btn-insta:hover { background-color: #fff; color: #d62976; transform: scale(1.05); }
 
-        footer { background-color: #fff; padding-top: 40px; border-top: 1px solid #ddd; color: #555; }
+        footer { background-color: #fff; padding-top: 40px; border-top: 1px solid #ddd; color: #555; z-index: 1; position: relative; }
         .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #eee; }
         .footer-column { flex: 1; min-width: 200px; } .footer-column.about-us p { font-size: 13px; line-height: 1.7; margin-top: 10px; }
         .footer-column .logo-footer img { height: 40px; margin-bottom: 15px; }
@@ -502,7 +502,6 @@
         .footer-contact-info .phone-number { font-size: 22px; font-weight: bold; color: #005691; direction: ltr; margin-bottom: 5px; }
         .footer-contact-info p { font-size: 12px; color: #555; }
         
-        /* بهبود استایل فرم خبرنامه */
         .footer-subscription { 
             display: flex;
             flex-direction: column;
@@ -519,7 +518,7 @@
             outline: none;
             font-family: inherit;
             transition: border-color 0.3s ease;
-            min-width: 0; /* برای جلوگیری از مشکل overflow در فایرفاکس */
+            min-width: 0;
         }
         .footer-subscription input:focus { border-color: var(--new-red-primary); }
         .footer-subscription button { 
@@ -562,48 +561,77 @@
             .header-main .container { justify-content: space-between; position: relative; }
             .menu-toggle { display: block; }
             .search-container { order: 3; width: 100%; margin-top: 10px;}
-            .logo { order: 1; } 
-            .header-actions { order: 2;}
+            .logo { order: 1; } .header-actions { order: 2;}
             nav .container { padding: 0; }
             
-            /* در مد موبایل، Nav-links position: absolute می‌گیرد و خودش Stacking Context بالا دارد */
             .nav-links { 
                 flex-direction: column; 
-                position: absolute; 
-                top: 100%; 
-                right: 0; 
-                left: 0; 
-                background-color: #fff; 
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-                z-index: 1101; 
-                padding: 0; 
-                gap: 0; 
-                max-height: 0; 
-                overflow-y: auto; 
-                overflow-x: hidden; 
-                flex-wrap: wrap;
-                transition: max-height 0.3s ease-out;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: white;
+                z-index: 1100;
+                padding: 0;
+                gap: 0;
+                max-height: 0;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding-top: 60px;
             }
-            .nav-links.active { max-height: 80vh; padding-bottom: 10px; }
-            .nav-links li { width: 100%; border-bottom: 1px solid #f0f0f0; }
+            .nav-links.active { 
+                max-height: 100vh;
+                padding-bottom: 20px;
+            }
+            .nav-links li { 
+                width: 100%; 
+                border-bottom: 1px solid #f0f0f0; 
+            }
             .nav-links li:last-child { border-bottom: none; }
-            .nav-links li a { padding: 12px 20px; width: 100%; border-radius: 0; }
+            .nav-links li a { 
+                padding: 12px 20px; 
+                width: 100%; 
+                border-radius: 0; 
+            }
             
-            /* زیرمنوهای دسکتاپ در موبایل مخفی می‌شوند */
             .nav-links li.category-nav-item > .mega-menu, 
-            .nav-links li.has-submenu .simple-submenu { display: none !important; }
+            .nav-links li.has-submenu .simple-submenu { 
+                display: none !important; 
+            }
             
-            /* زیرمنوهای موبایل که در داخل nav.active قرار می‌گیرند، به دلیل z-index والدشان (1101) روی اسلایدر قرار می‌گیرند */
-            .nav-links li.open .mobile-submenu { display: block; max-height: 1000px; }
+            .nav-links li.open .mobile-submenu { 
+                display: block; 
+                max-height: 1000px; 
+            }
 
-            .secondary-slider { height: 280px; }
+            .secondary-slider { 
+                height: auto;
+                max-height: 280px;
+            }
+            
             .hero-section .container { flex-direction: column; }
-            .slider-main { width: 100%; } 
-            .side-banners { width: 100%; flex-direction: row; }
-            .side-banners .side-banner { flex: 1; height: 150px; }
+            .slider-main { 
+                width: 100%; 
+                height: auto;
+                aspect-ratio: 16/9;
+            } 
+            
+            .side-banners { 
+                width: 100%; 
+                flex-direction: row; 
+            }
+            .side-banners .side-banner { 
+                flex: 1; 
+                height: auto;
+                aspect-ratio: 16/9;
+            }
+            
             .feature-section { flex-direction: column; } 
             .feature-media { flex-basis: auto; width: 100%; }
+            
             .testimonial-card, .blog-post { width: calc(50% - 8px); }
+            
             .footer-column { min-width: 45%; }
             .footer-column.about-us { order: -1; width: 100%; text-align: center; }
             .footer-column.about-us .trust-logos { justify-content: center; }
@@ -611,7 +639,6 @@
             .footer-bottom { flex-direction: column; } 
             .social-icons { margin-top: 10px; }
             
-            /* بهبود فرم خبرنامه در موبایل */
             .footer-subscription .subscription-input-group {
                 flex-direction: column;
             }
@@ -628,31 +655,37 @@
         
         @media (max-width: 768px) { 
             .testimonial-card, .blog-post { width: 100%; } 
-            .secondary-slider { height: 220px; } 
-            .secondary-slider-controls button { font-size: 18px; width: 35px; height: 35px; } 
+            .secondary-slider { max-height: 220px; } 
+            .secondary-slider-controls button { font-size: 18px; padding: 8px 12px; } 
             .info-box-content { padding: 15px; } 
             .info-box-content h2 { font-size: 18px; } 
-            .info-box-content p { font-size: 14px; }
-            .slider-main { height: 300px; }
-            .amazing-offers-section { padding: 15px 10px; }
-            .product-card { min-width: 170px; width: 170px; }
-            .promo-banner { height: 160px; }
-            .feature-section { padding: 20px 15px; }
-            .instagram-banner { padding: 20px 15px; flex-direction: column; align-items: center; text-align: center; }
+            .info-box-content p { font-size: 14px; } 
+            
+            .products-grid {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .product-card {
+                min-width: 45%;
+                margin-bottom: 15px;
+            }
         }
         
         @media (max-width: 576px) { 
-            .secondary-slider { height: 180px; }
-            .slider-main { height: 250px; }
-            .side-banners { flex-direction: column; }
-            .side-banners .side-banner { width: 100%; height: 140px; }
-            .category-item { width: 80px; }
-            .product-card { min-width: 150px; width: 150px; }
-            .product-card .product-image img { width: 120px; height: 120px; }
-            .feature-text h3 { font-size: 16px; }
-            .feature-text p { font-size: 13px; }
-            .team-member { width: 140px; }
-            .footer-contact-info .phone-number { font-size: 18px; }
+            .secondary-slider { max-height: 180px; } 
+            
+            .product-card {
+                min-width: 100%;
+            }
+            
+            .side-banners {
+                flex-direction: column;
+            }
+            
+            .side-banners .side-banner {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -797,7 +830,7 @@
              </div>
         </section>
         <!-- بنر بزرگ تبلیغاتی -->
-        <section style="margin: 20px 0;"><a href="#"><img src="https://via.placeholder.com/1270x150/005691/FFFFFF?text=راهکارهای+هوشمند+خانه+با+محصولات+بوش+-+کلیک+کنید" alt="خانه هوشمند بوش" style="border-radius: 10px; width: 100%;"></a></section>
+        <section style="margin: 20px 0; z-index: 1; position: relative;"><a href="#"><img src="https://via.placeholder.com/1270x150/005691/FFFFFF?text=راهکارهای+هوشمند+خانه+با+محصولات+بوش+-+کلیک+کنید" alt="خانه هوشمند بوش" style="border-radius: 10px; width: 100%;"></a></section>
         <!-- جدیدترین محصولات بوش -->
         <section class="product-section">
             <h2 class="section-title">جدیدترین محصولات بوش <a href="#" class="view-all">مشاهده همه</a></h2>
@@ -862,7 +895,7 @@
         <!-- وبلاگ -->
         <section class="blog-section">
             <h2 class="section-title">خواندنی‌ها: راهنما و مقالات <a href="#" class="view-all">مشاهده همه</a></h2>
-            <div class="blog-grid"><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/EF5350?text=راهنمای+پکیج" alt="راهنمای انتخاب پکیج"></a><div class="post-content"><h4><a href="#">راهنمای جامع انتخاب پکیج شوفاژ دیواری بوتان مناسب منزل شما</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۱ ماه پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/005691?text=نگهداری+لباسشویی" alt="نگهداری لباسشویی بوش"></a><div class="post-content"><h4><a href="#">نکات کلیدی برای افزایش طول عمر ماشین لباسشویی بوش</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۲ هفته پیش</span><span><i class="far fa-user"></i> تحریریه</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/007bff?text=ابزار+جدید+بوش" alt="ابزار جدید بوش"></a><div class="post-content"><h4><a href="#">معرفی جدیدترین ابزارآلات شارژی بوش با تکنولوژی ProCORE18V</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۳ روز پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div></div>
+            <div class="blog-grid"><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/EF5350?text=راهنمای+پکیج" alt="راهنمای انتخاب پکیج"></a><div class="post-content"><h4><a href="#">راهنمای جامع انتخاب پکیج شوفاژ دیواری بوتان مناسب منزل شما</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۱ ماه پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/005691?text=نگهداری+لباسشویی" alt="نگهداری لباسشویی بوش"></a><div class="post-content"><h4><a href="#">نکات کلیدی برای افزایش طول عمر ماشین لباسشویی بوش</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۲ هفته پیش</span><span><i class="far fa-user"></i> تحریریه</span></div></div></div><div class="blog-post"><a href="#" class="post-image"><img src="https://via.placeholder.com/300x180/eeeeee/007bff?text=ابزار+بوش" alt="ابزار جدید بوش"></a><div class="post-content"><h4><a href="#">معرفی جدیدترین ابزارآلات شارژی بوش با تکنولوژی ProCORE18V</a></h4><div class="post-meta"><span><i class="far fa-calendar-alt"></i> ۳ روز پیش</span><span><i class="far fa-user"></i> بخش فنی</span></div></div></div></div>
         </section>
         <!-- بنر اینستاگرام -->
         <section class="instagram-banner">
@@ -1125,11 +1158,38 @@
         }
 
         if (searchInputEl && searchSuggestionsBoxEl && searchButtonEl) {
-            searchInputEl.addEventListener('input', function() { const query = this.value.trim().toLowerCase(); if (query.length < 1) { searchSuggestionsBoxEl.style.display = 'none'; return; } const filtered = sampleSearchKeywords.filter(keyword => keyword.toLowerCase().includes(query)); displaySuggestions(filtered.slice(0, 7)); });
-            searchInputEl.addEventListener('keypress', (event) => { if (event.key === 'Enter') { event.preventDefault(); performSearch(searchInputEl.value.trim()); }});
-            searchButtonEl.addEventListener('click', () => { performSearch(searchInputEl.value.trim()); });
-            document.addEventListener('click', function(event) { if (searchInputEl && searchSuggestionsBoxEl && !searchInputEl.contains(event.target) && !searchSuggestionsBoxEl.contains(event.target)) { searchSuggestionsBoxEl.style.display = 'none'; }});
-            searchInputEl.addEventListener('focus', function() { if (this.value.trim().length >= 1) { const query = this.value.trim().toLowerCase(); const filtered = sampleSearchKeywords.filter(keyword => keyword.toLowerCase().includes(query)); displaySuggestions(filtered.slice(0, 7)); }});
+            searchInputEl.addEventListener('input', function() { 
+                const query = this.value.trim().toLowerCase(); 
+                if (query.length < 1) { 
+                    searchSuggestionsBoxEl.style.display = 'none'; 
+                    return; 
+                } 
+                const filtered = sampleSearchKeywords.filter(keyword => keyword.toLowerCase().includes(query)); 
+                displaySuggestions(filtered.slice(0, 7)); 
+            });
+            searchInputEl.addEventListener('keypress', (event) => { 
+                if (event.key === 'Enter') { 
+                    event.preventDefault(); 
+                    performSearch(searchInputEl.value.trim()); 
+                }
+            });
+            searchButtonEl.addEventListener('click', () => { 
+                performSearch(searchInputEl.value.trim()); 
+            });
+            document.addEventListener('click', function(event) { 
+                if (searchInputEl && searchSuggestionsBoxEl && 
+                    !searchInputEl.contains(event.target) && 
+                    !searchSuggestionsBoxEl.contains(event.target)) { 
+                    searchSuggestionsBoxEl.style.display = 'none'; 
+                }
+            });
+            searchInputEl.addEventListener('focus', function() { 
+                if (this.value.trim().length >= 1) { 
+                    const query = this.value.trim().toLowerCase(); 
+                    const filtered = sampleSearchKeywords.filter(keyword => keyword.toLowerCase().includes(query)); 
+                    displaySuggestions(filtered.slice(0, 7)); 
+                }
+            });
         }
     </script>
 </body>
